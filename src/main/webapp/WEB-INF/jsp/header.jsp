@@ -36,7 +36,10 @@
         <h5 class="my-0 mr-md-auto font-weight-normal">Nepal Driving Center</h5>
         <nav class="my-2 my-md-0 mr-md-3">
             <a class="p-2 text-dark" href="${pageContext.request.contextPath}/home">Home</a>
+            <a class="p-2 text-dark" href="${pageContext.request.contextPath}/postal-code">Weather</a>
+            <a class="p-2 text-dark" href="${pageContext.request.contextPath}/summary">Summary</a>
             <a class="p-2 text-dark" href="${pageContext.request.contextPath}/index">Logout</a>
+
         </nav>
     </div>
 

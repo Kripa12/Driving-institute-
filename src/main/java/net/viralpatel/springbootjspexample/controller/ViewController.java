@@ -19,7 +19,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+/**
+ * View  Control
+ * Main api '/'
+ * only view returning related api*/
 
 @Controller
 public class ViewController {
@@ -31,14 +34,35 @@ public class ViewController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/indexpage")
-    public String welcome(ModelMap modelMap) {
-
+    /**
+     * default api
+     * index page*/
+    @GetMapping("/")
+    public String welcome(ModelMap modelMap , HttpServletResponse response) {
+        Cookie name = new Cookie("username",null);
+        Cookie userId = new Cookie("userId",null);
+        Cookie userType = new Cookie("userType",null);
+        response.addCookie(name);
+        response.addCookie(userId);
+        response.addCookie(userType);
         modelMap.put("message", "helloMessage");
 
         return "index";
     }
 
+
+    /**
+     * summary page returning api*/
+    @GetMapping("/summary")
+    public String loadFeedbackList(){
+        return "summary";
+    }
+
+
+    /**
+     * summary page returning api
+     * @param username -name of user
+     * @param password -password of user*/
     @PostMapping("/login")
     public String login(@RequestParam String username , @RequestParam String password , ModelMap modelMap, HttpServletResponse response,HttpServletRequest request) {
         // todo find user type and return view according to it
@@ -64,12 +88,16 @@ public class ViewController {
         return "admin-dashboard";
     }
 
+    /**
+     * @param - id of user*/
     @GetMapping("/exam/{id}")
     public String takeExam(ModelMap modelMap , @PathVariable String id) {
         modelMap.put("userId" , id);
         return "exam-form";
     }
 
+    /**
+     * index - logout*/
     @GetMapping("/index")
     public String logout(HttpServletResponse response) {
         // clear cookie data
@@ -99,10 +127,20 @@ public class ViewController {
         return "admin-dashboard";
     }
 
+    /**
+     * view all answers*/
     @GetMapping("/view-answers")
     public String viewUserAnswers(ModelMap modelMap){
         List<User> users = userService.findAll();
         modelMap.put("userList" , users);
         return "view-answer";
+    }
+
+
+    /**
+     * weather data page*/
+    @GetMapping("/postal-code")
+    public String loadMarketPriceData(){
+        return "weather-data";
     }
 }

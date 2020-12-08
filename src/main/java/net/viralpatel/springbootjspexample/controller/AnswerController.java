@@ -8,7 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
-
+/**
+ * @Rest controller
+ * main api- /answer*/
 @RestController
 
 @RequestMapping("/answer")
@@ -20,6 +22,10 @@ public class AnswerController {
         this.answerService = answerService;
         this.userService = userService;
     }
+
+    /**
+     * '/submit' sub api
+     * @param answer  body accepts answer type param*/
 
     @PostMapping("/submit")
     public ResponseEntity<?> saveAnswer(@RequestBody Answers answer){
@@ -37,6 +43,8 @@ public class AnswerController {
       }
     }
 
+    /**
+     * @param id type string , pass the answer of id */
     @GetMapping("/{id}")
     public ResponseEntity<?> getAnswers(@PathVariable String id) {
         User user = userService.findOne(Long.valueOf(id));
