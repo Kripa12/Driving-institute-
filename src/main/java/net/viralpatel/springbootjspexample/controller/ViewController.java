@@ -96,8 +96,8 @@ public class ViewController {
         return "exam-form";
     }
 
-    /**
-     * index - logout*/
+        /**
+         * index - logout*/
     @GetMapping("/index")
     public String logout(HttpServletResponse response) {
         // clear cookie data
